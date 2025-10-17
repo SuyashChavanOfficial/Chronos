@@ -13,7 +13,7 @@ const app = express();
 app.use(express.json({ limit: "5mb" }));
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://chronos-23lh.onrender.com"],
+    origin: ["http://localhost:3001", "https://chronos-23lh.onrender.com"],
     methods: ["GET", "POST", "DELETE"],
     allowedHeaders: ["Content-Type"],
   })

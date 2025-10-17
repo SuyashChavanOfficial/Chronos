@@ -19,7 +19,6 @@ export default function DataTable() {
 
   const API = process.env.REACT_APP_API_URL || "/api";
 
-  // Fetch data function
   const fetchData = useCallback(
     async (filterDate) => {
       setStatus("Loading...");
@@ -41,11 +40,10 @@ export default function DataTable() {
 
   // Auto-refresh every 5 minutes
   useEffect(() => {
-    const id = setInterval(() => fetchData(date || undefined), 300000); // 5 minutes
+    const id = setInterval(() => fetchData(date || undefined), 300000);
     return () => clearInterval(id);
   }, [date, fetchData]);
 
-  // Delete single item
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this item?")) return;
     try {
@@ -60,7 +58,6 @@ export default function DataTable() {
     }
   };
 
-  // Delete multiple items
   const handleDeleteSelected = async () => {
     if (selectedIds.length === 0) return;
     if (
@@ -85,7 +82,6 @@ export default function DataTable() {
     }
   };
 
-  // Handle row checkbox toggle
   const toggleSelect = (id) => {
     if (selectedIds.includes(id)) {
       setSelectedIds(selectedIds.filter((sid) => sid !== id));
@@ -94,7 +90,6 @@ export default function DataTable() {
     }
   };
 
-  // Select all checkbox
   const toggleSelectAll = () => {
     if (selectedIds.length === items.length) {
       setSelectedIds([]);
@@ -156,7 +151,6 @@ export default function DataTable() {
           Delete Selected
         </button>
 
-        {/* Fixed width status */}
         <span className="text-gray-700 w-36 inline-block">{status}</span>
 
         <label className="ml-4 flex items-center gap-2">
@@ -213,8 +207,10 @@ export default function DataTable() {
                 return (
                   <tr
                     key={it._id || idx}
-                    className={`hover:bg-gray-50 transition ${
-                      isSelected ? "bg-blue-100" : ""
+                    className={`transition ${
+                      isSelected
+                        ? "bg-blue-100 hover:bg-blue-100"
+                        : "hover:bg-gray-200"
                     }`}
                   >
                     <td className="px-4 py-2 border-b">
