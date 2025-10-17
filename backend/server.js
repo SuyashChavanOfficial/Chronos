@@ -11,7 +11,13 @@ const app = express();
 
 // ---------- Middleware ----------
 app.use(express.json({ limit: "5mb" }));
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "https://chronos-23lh.onrender.com"],
+    methods: ["GET", "POST", "DELETE"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
 
 // ---------- Connect MongoDB ----------
 if (!process.env.MONGO_URI) {
